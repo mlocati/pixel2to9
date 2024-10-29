@@ -1,3 +1,5 @@
+[![Build](https://github.com/mlocati/pixel2to9/actions/workflows/build.yml/badge.svg)](https://github.com/mlocati/pixel2to9/actions/workflows/build.yml)
+
 # Convert Pixel2 to Pixel9 Concrete CMS CIF Files
 
 Do you have a website with concrete5 v8 that uses the old Pixel 2 theme and you want to switch to Concrete CMS v9+ with a new [Pixel 9](https://market.concretecms.com/products/2140e37d-cf89-11ee-b9df-0a97d4ce16b9) theme?
