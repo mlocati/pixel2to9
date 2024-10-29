@@ -1,5 +1,11 @@
-# Vue 3 + TypeScript + Vite
+# Convert Pixel2 to Pixel9 Concrete CMS CIF Files
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Do you have a website with concrete5 v8 that uses the old Pixel 2 theme and you want to switch to Concrete CMS v9+ with a new [Pixel 9](https://market.concretecms.com/products/2140e37d-cf89-11ee-b9df-0a97d4ce16b9) theme?
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+You can do the following:
+
+1. In your old concrete5 v8 website install the [Migration Tool package](https://github.com/concretecms/addon_migration_tool)
+2. Export the website content to XML files (the so-called CIF Format)
+3. Convert the XML files with this tool
+4. In your new ConcreteCMS v9+ website install the [Migration Tool package](https://github.com/concretecms/migration_tool)
+5. Import the XML files
