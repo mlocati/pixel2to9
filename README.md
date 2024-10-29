@@ -8,6 +8,6 @@ You can do the following:
 
 1. In your old concrete5 v8 website install the [Migration Tool package](https://github.com/concretecms/addon_migration_tool)
 2. Export the website content to XML files (the so-called CIF Format)
-3. Convert the XML files with this tool
+3. Convert the XML files with [this tool](https://mlocati.github.io/pixel2to9/)
 4. In your new ConcreteCMS v9+ website install the [Migration Tool package](https://github.com/concretecms/migration_tool)
 5. Import the XML files
