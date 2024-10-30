@@ -3,9 +3,10 @@ import Block from '../Block';
 
 export default class Form extends Block implements Converter
 {
-    // @ts-ignore: 'doc' is declared but its value is never read
-    // @ts-ignore: 'warnings' is declared but its value is never read
     public convert(doc: XMLDocument, warnings: string[]): void
     {
+        this.processconvertBlockTemplates(doc, 'form', {
+            pixel_subscribe: {newTemplate: '', warning: 'The pixel_subscribe custom template of the Form block is deprecated'},
+        }, warnings);
     }
 }
