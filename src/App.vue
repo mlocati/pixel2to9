@@ -28,8 +28,9 @@ watch(input, (newValue: string) => {
 <template>
   <header>
     <h1>
-      <img src="/images/pixel.svg" />
+      <img src="/images/pixel.svg" alt=""/>
       Pixel 2 to Pixel 9 CIF Converter
+      <a href="https://github.com/mlocati/pixel2to9"><img src="/images/github.svg" class="github" alt="View on GitHub" /></a>
     </h1>
   </header>
   <main>
@@ -44,12 +45,22 @@ watch(input, (newValue: string) => {
 <style lang="css" scoped>
 header {
   text-align: center;
+  margin: 0;
+  padding: 10px;
 }
 header img {
   height: 2rem;
   vertical-align: text-bottom;
   margin-bottom: 2px;
 }
+img.github {
+  background-color: #ffffff77;
+  float: right;
+}
+img.github:hover {
+  background-color: #ffffff;
+}
+
 main
 {
   flex: auto;
