@@ -95,6 +95,10 @@ function download()
 }
 .actions {
     text-align: center;
+    padding: 10px 0 20px 0;
+}
+.actions button {
+    margin: 0 10px 0 10px;
 }
 </style>
 <style lang="css">

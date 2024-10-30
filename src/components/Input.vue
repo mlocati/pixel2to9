@@ -82,6 +82,7 @@ textarea {
 }
 .actions {
   text-align: center;
+  padding: 10px 0 20px 0;
 }
 input[type="file"] {
     display: none;
