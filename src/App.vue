@@ -27,7 +27,10 @@ watch(input, (newValue: string) => {
 </script>
 <template>
   <header>
-    <h1>Pixel 2 to Pixel 9 CIF Converter</h1>
+    <h1>
+      <img src="/images/pixel.svg" />
+      Pixel 2 to Pixel 9 CIF Converter
+    </h1>
   </header>
   <main>
     <section class="input">
@@ -38,11 +41,17 @@ watch(input, (newValue: string) => {
     </section>
   </main>
 </template>
-<style lang="scss" scoped>
+<style lang="css" scoped>
 header {
-  height: 75px;
+  text-align: center;
 }
-main {
+header img {
+  height: 2rem;
+  vertical-align: text-bottom;
+  margin-bottom: 2px;
+}
+main
+{
   flex: auto;
   display: flex;
   flex-direction: row;

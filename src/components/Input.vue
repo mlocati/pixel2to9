@@ -24,6 +24,28 @@ async function filePicked()
         window.alert(e?.message || e?.toString() || '?');
     }
 }
+
+async function drop(e: DragEvent, preview: boolean)
+{
+    if (!e?.dataTransfer) {
+        return;
+    }
+    const file = e.dataTransfer.files?.length === 1 ? e.dataTransfer.files[0] : null;
+    if (!file?.size) {
+        e.dataTransfer.dropEffect = 'none'
+        return false;
+    }
+    e.dataTransfer.dropEffect = 'copy';
+    if (preview) {
+        return;
+    }
+    try {
+        xml.value = await readFile(file);
+    } catch (e: any) {
+        window.alert(e?.message || e?.toString() || '?');
+    }
+}
+
 onMounted(() => {
     filePicker.value?.addEventListener('change', filePicked);
 });
@@ -34,9 +56,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="area">
-        <header>Pixel 2 CIF</header>
-        <textarea v-model="xml"></textarea>
+    <div class="area" v-on:dragenter="drop($event, true)" v-on:dragover="drop($event, true)" v-on:drop.prevent="drop($event, false)">
+        <header><h2>Pixel 2 CIF</h2></header>
+        <textarea v-model="xml" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
         <div class="actions">
             <button v-on:click.prevent="pickFile()">Open file</button>
             <input type="file" accept="application/xml" ref="filePicker" />
@@ -44,7 +66,7 @@ onBeforeUnmount(() => {
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .area
 {
     display: flex;
