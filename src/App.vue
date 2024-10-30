@@ -1,30 +1,24 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header>
+    <h1>Pixel 2 to Pixel 9 CIF Converter</h1>
+  </header>
+  <main>
+    <section class="input"></section>
+    <section class="output"></section>
+  </main>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss" scoped>
+header {
+  height: 75px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+main {
+  flex: auto;
+  display: flex;
+  flex-direction: row;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.input,
+.output {
+  width: 50%;
+  display: flex;
 }
 </style>
