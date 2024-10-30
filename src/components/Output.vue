@@ -65,6 +65,9 @@ function download()
 .error
 {
     white-space: pre-wrap;
+    & sourcetext {
+        font-family: SFMono-Regula, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;    
+    }
 }
 .area
 {
