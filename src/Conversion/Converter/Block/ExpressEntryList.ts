@@ -5,7 +5,7 @@ export default class ExpressEntryList extends Block implements Converter
 {
     public convert(doc: XMLDocument, warnings: string[]): void
     {
-        this.processconvertBlockTemplates(doc, 'express_entry_detail', {
+        this.processconvertBlockTemplates(doc, 'express_entry_list', {
             pixel_clients_carousel: {newTemplate: 'pixel_client_carousel'},
             pixel_clients_carousel_navigation: {newTemplate: '', warning: 'The pixel_clients_carousel_navigation custom template of the Express Entry List block is deprecated'},
             pixel_clients_carousel_pagination: {newTemplate: '', warning: 'The pixel_clients_carousel_pagination custom template of the Express Entry List block is deprecated'},
