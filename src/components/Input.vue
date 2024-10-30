@@ -13,7 +13,7 @@ function pickFile()
 {
     filePicker.value?.click();
 }
-async function filePicked(e: Event)
+async function filePicked()
 {
     if (filePicker.value?.files?.length !== 1) {
         return;
