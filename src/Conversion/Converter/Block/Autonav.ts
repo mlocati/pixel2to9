@@ -3,8 +3,11 @@ import Block from '../Block';
 
 export default class Autonav extends Block implements Converter
 {
-    // @ts-ignore: 'doc' is declared but its value is never read
-    public convert(doc: XMLDocument): void
+    public convert(doc: XMLDocument, warnings: string[]): void
     {
+        this.processconvertBlockTemplates(doc, 'autonav', {
+            pixel_breadcrumb: {newTemplate: '', warning: 'The pixel_breadcrumb custom template of the Autonav block is deprecated'},
+            pixel_tree: {newTemplate: '', warning: 'The pixel_breadcrumb custom template of the Autonav block is deprecated'},
+        }, warnings);
     }
 }

@@ -3,7 +3,8 @@ import Block from '../Block';
 
 export default class WhaleGallery extends Block implements Converter
 {
-    public convert(doc: XMLDocument): void
+    // @ts-ignore: 'warnings' is declared but its value is never read
+    public convert(doc: XMLDocument, warnings: string[]): void
     {
         this.addDataField(doc, 'btWhaleGallery', 'columnsSm', (el) => el.nodeValue = '0');
         this.addDataField(doc, 'btWhaleGallery', 'columnsMd', (el) => el.nodeValue = '0');

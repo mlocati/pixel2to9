@@ -3,7 +3,9 @@ export type ElementCallback = (element: Element) => void;
 interface TemplateConversionOption
 {
     newCustomClasses?: string;
+    /** Empty string to remove the custom template, non-empty string to change it, not specified to keep it */
     newTemplate?: string;
+    warning?: string;
 }
 interface TemplateConversionOptions
 {
@@ -25,7 +27,7 @@ function findElements(doc: XMLDocument, xpath: string, context?: Element|null): 
 
 export default abstract class Block
 {
-    protected convertBlockTemplateToCSSClass(doc: XMLDocument, blockHandle: string, map: TemplateConversionOptions): void
+    protected processconvertBlockTemplates(doc: XMLDocument, blockHandle: string, map: TemplateConversionOptions, warnings: string[]): void
     {
         const blockElements = findElements(doc, `//block[@type="${blockHandle}"]`);
         blockElements.forEach((blockElement) => {
@@ -38,10 +40,13 @@ export default abstract class Block
                 return;
             }
             const options = map[customTemplate];
-            if (options.newTemplate) {
-                blockElement.setAttribute('custom-template', options.newTemplate.endsWith('.php') ? options.newTemplate : `${options.newTemplate}.php`);
-            } else {
+            if (options.warning) {
+                warnings.push(options.warning);
+            }
+            if (options.newTemplate === '') {
                 blockElement.removeAttribute('custom-template');
+            } else if (typeof options.newTemplate === 'string') {
+                blockElement.setAttribute('custom-template', options.newTemplate.endsWith('.php') ? options.newTemplate : `${options.newTemplate}.php`);
             }
             const newCustomClasses = options.newCustomClasses ? options.newCustomClasses.split(/\s+/).filter((c) => c.length > 0) : [];
             if (newCustomClasses.length > 0) {

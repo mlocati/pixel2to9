@@ -35,7 +35,7 @@ import WhalePricingTable from './Converter/Block/WhalePricingTable';
 
 export interface Converter
 {
-  convert: (doc: XMLDocument) => void;
+  convert: (doc: XMLDocument, warnings: string[]) => void;
 }
 
 const Converters: ReadonlyArray<Converter> = [

@@ -10,6 +10,8 @@ import formatXML from './Xml/Formatter';
 const input = ref<string>('');
 const output = ref<string>('');
 const htmlError = ref<string>('');
+const warnings = ref<string[]>([]);
+
 watch(input, (newValue: string) => {
   output.value = '';
   htmlError.value = '';
@@ -17,9 +19,12 @@ watch(input, (newValue: string) => {
     return;
   }
   try {
+    const newWarnings: string[] = [];
     const doc = loadXML(input.value);
-    Converters.forEach((converter) => converter.convert(doc));
+    Converters.forEach((converter) => converter.convert(doc, newWarnings));
     output.value = formatXML(doc);
+    warnings.value.splice(0, warnings.value.length);
+    newWarnings.forEach((w) => warnings.value.push(w));
   } catch (e: any) {
     htmlError.value = e?.message || e?.toString() || '?';
   }
@@ -38,7 +43,7 @@ watch(input, (newValue: string) => {
       <Input v-on:input="input = $event" />
     </section>
     <section class="output">
-      <Output v-bind:xml="output" v-bind:html-error="htmlError" />
+      <Output v-bind:xml="output" v-bind:html-error="htmlError" v-bind:warnings="warnings" />
     </section>
   </main>
 </template>
