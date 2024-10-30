@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, warn } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     xml: String,
