@@ -19,7 +19,7 @@ You can do the following:
 
 In order to build and run this app locally:
 
-1. Install NodeJS 22 LTS
+1. Install [NodeJS](https://nodejs.org/) 22 LTS
 2. Install the npm dependencies with `npm ci`
 3. Run a local server with the app with `npm run dev`
 
@@ -29,3 +29,6 @@ Data for the block types is converted by the converters in the `src/Conversion/C
 
 If you add a new block converter, please remember to add it to the `Converters` array defined in the `src/Conversion/Converter.ts` file.
 
+### Updating the published app
+
+The app is (re)created automatically everytime something is pushed to the repository: you only have to code, the dirty work will be done automatically :wink:.
