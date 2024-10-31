@@ -2,8 +2,10 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { readFile } from '../Service/File';
 
+const LS_KEY_FRAGMENT = 'pixel2to9:input-fragment';
+
 const xml = ref<string>('');
-const fragment = ref<boolean>(false);
+const fragment = ref<boolean>(localStorage.getItem(LS_KEY_FRAGMENT) === 'true');
 
 const emit = defineEmits<{
   input: [xml: string, fragment: boolean],
@@ -13,6 +15,11 @@ watch(xml, (newValue: string) => {
     emit('input', newValue, fragment.value);
 });
 watch(fragment, (newValue: boolean) => {
+    if (newValue) {
+        localStorage.setItem(LS_KEY_FRAGMENT, 'true');
+    } else {
+        localStorage.removeItem(LS_KEY_FRAGMENT);
+    }
     if (xml.value) {
         emit('input', xml.value, newValue);
     }
