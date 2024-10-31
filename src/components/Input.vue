@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
 <template>
     <div class="area" v-on:dragenter="drop($event, true)" v-on:dragover="drop($event, true)" v-on:drop.prevent="drop($event, false)">
         <header><h2>Pixel 2 CIF</h2></header>
-        <textarea v-model="xml" ref="textarea" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
+        <textarea v-model="xml" ref="textarea" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
         <div class="actions">
             <label>
                 <input type="checkbox" v-model="fragment" />

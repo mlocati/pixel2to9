@@ -75,7 +75,7 @@ function download()
         </div>
         <template v-else-if="xml">
             <div class="xml-and-warnings">
-                <textarea class="xml" ref="outputText" readonly v-bind:value="xml"></textarea>
+                <textarea class="xml" ref="outputText" readonly autocorrect="off" autocapitalize="off" spellcheck="false" v-bind:value="xml"></textarea>
                 <div v-if="groupedWarnings.length > 0" class="warnings">
                     Warnings!
                     <ol>
