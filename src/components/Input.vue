@@ -2,10 +2,20 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { readFile } from '../Service/File';
 
-const emit = defineEmits(['input']);
 const xml = ref<string>('');
+const fragment = ref<boolean>(false);
+
+const emit = defineEmits<{
+  input: [xml: string, fragment: boolean],
+}>()
+
 watch(xml, (newValue: string) => {
-    emit('input', newValue);
+    emit('input', newValue, fragment.value);
+});
+watch(fragment, (newValue: boolean) => {
+    if (xml.value) {
+        emit('input', xml.value, newValue);
+    }
 });
 
 const filePicker = ref<HTMLInputElement>();
@@ -60,6 +70,10 @@ onBeforeUnmount(() => {
         <header><h2>Pixel 2 CIF</h2></header>
         <textarea v-model="xml" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
         <div class="actions">
+            <label>
+                <input type="checkbox" v-model="fragment" />
+                Fragment
+            </label>
             <button v-on:click.prevent="pickFile()">Open file</button>
             <input type="file" accept="application/xml" ref="filePicker" />
         </div>
@@ -83,6 +97,10 @@ textarea {
 .actions {
   text-align: center;
   padding: 10px 0 20px 0;
+}
+.actions label {
+    float: left;
+    margin-top: -10px;
 }
 input[type="file"] {
     display: none;
