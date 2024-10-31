@@ -2,7 +2,7 @@ import xmlFormat from 'xml-formatter';
 
 const xmlSerializer = new XMLSerializer();
 
-function formatXML(el: Element): string
+function formatXML(el: Element|XMLDocument): string
 {
   const xml = xmlSerializer.serializeToString(el);
   return xmlFormat(xml, {
