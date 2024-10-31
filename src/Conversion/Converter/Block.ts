@@ -7,9 +7,14 @@ interface TemplateConversionOption
     newTemplate?: string;
     warning?: string;
 }
+interface TemplateConversionOptionDeprecated
+{
+    deprecated: true;
+}
+
 interface TemplateConversionOptions
 {
-    [Identifier: string]: TemplateConversionOption
+    [Identifier: string]: TemplateConversionOption | TemplateConversionOptionDeprecated
 }
 
 function findElements(doc: XMLDocument, xpath: string, context?: Element|null): Element[]
@@ -40,30 +45,35 @@ export default abstract class Block
                 return;
             }
             const options = map[customTemplate];
-            if (options.warning) {
-                warnings.push(options.warning);
-            }
-            if (options.newTemplate === '') {
+            if ('deprecated' in options) {
                 blockElement.removeAttribute('custom-template');
-            } else if (typeof options.newTemplate === 'string') {
-                blockElement.setAttribute('custom-template', options.newTemplate.endsWith('.php') ? options.newTemplate : `${options.newTemplate}.php`);
-            }
-            const newCustomClasses = options.newCustomClasses ? options.newCustomClasses.split(/\s+/).filter((c) => c.length > 0) : [];
-            if (newCustomClasses.length > 0) {
-                let styleElement = findElements(doc, './style', blockElement).shift();
-                if (!styleElement) {
-                    styleElement = doc.createElement('stype');
-                    blockElement.insertBefore(styleElement, blockElement.firstChild);
+                warnings.push(`The "${customTemplate}" custom template of the "${blockHandle}" block is deprecated`);
+            } else {
+                if (options.warning) {
+                    warnings.push(options.warning);
                 }
-                let customClassElement = findElements(doc, './customClass', styleElement).shift();
-                if (!customClassElement) {
-                    customClassElement = doc.createElement('customClass');
-                    styleElement.appendChild(customClassElement);
+                if (options.newTemplate === '') {
+                    blockElement.removeAttribute('custom-template');
+                } else if (typeof options.newTemplate === 'string') {
+                    blockElement.setAttribute('custom-template', options.newTemplate.endsWith('.php') ? options.newTemplate : `${options.newTemplate}.php`);
                 }
-                const oldCustomClasses = (customClassElement.nodeValue || '').split(/\s+/).filter((c) => c.length > 0);
-                const customClassesToBeAdded = newCustomClasses.filter((c) => !oldCustomClasses.includes(c));
-                if (customClassesToBeAdded.length > 0) {
-                    customClassElement.nodeValue = [... oldCustomClasses, ...customClassesToBeAdded].join(' ');
+                const newCustomClasses = options.newCustomClasses ? options.newCustomClasses.split(/\s+/).filter((c) => c.length > 0) : [];
+                if (newCustomClasses.length > 0) {
+                    let styleElement = findElements(doc, './style', blockElement).shift();
+                    if (!styleElement) {
+                        styleElement = doc.createElement('stype');
+                        blockElement.insertBefore(styleElement, blockElement.firstChild);
+                    }
+                    let customClassElement = findElements(doc, './customClass', styleElement).shift();
+                    if (!customClassElement) {
+                        customClassElement = doc.createElement('customClass');
+                        styleElement.appendChild(customClassElement);
+                    }
+                    const oldCustomClasses = (customClassElement.nodeValue || '').split(/\s+/).filter((c) => c.length > 0);
+                    const customClassesToBeAdded = newCustomClasses.filter((c) => !oldCustomClasses.includes(c));
+                    if (customClassesToBeAdded.length > 0) {
+                        customClassElement.nodeValue = [... oldCustomClasses, ...customClassesToBeAdded].join(' ');
+                    }
                 }
             }
         });
