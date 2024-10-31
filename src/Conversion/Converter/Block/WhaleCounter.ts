@@ -9,6 +9,7 @@ export default class WhaleCounter extends Block implements Converter
             pixel_large: {deprecated: true},
             pixel_small: {deprecated: true},
         }, warnings);
+        this.convertFontAwesomeDataField(doc, 'btWhaleCounter', 'icon', warnings);
         this.renameBlockTypeHandle(doc, 'whale_counter', 'pixel_counter');
         this.renameDataTable(doc, 'btWhaleCounter', 'btPixelCounter');
     }
