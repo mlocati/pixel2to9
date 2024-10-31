@@ -3,9 +3,10 @@ import Block from '../Block';
 
 export default class ManualNav extends Block implements Converter
 {
-    // @ts-ignore: 'doc' is declared but its value is never read
-    // @ts-ignore: 'warnings' is declared but its value is never read
     public convert(doc: XMLDocument, warnings: string[]): void
     {
+        this.processconvertBlockTemplates(doc, 'manual_nav', {
+            pixel_top_bar: {newTemplate: '', warning: 'The pixel_top_bar custom template of the Manual Nav block is deprecated'},
+        }, warnings);
     }
 }
