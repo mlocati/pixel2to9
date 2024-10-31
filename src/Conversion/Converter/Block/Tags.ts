@@ -7,5 +7,6 @@ export default class Tags extends Block implements Converter
     // @ts-ignore: 'warnings' is declared but its value is never read
     public convert(doc: XMLDocument, warnings: string[]): void
     {
+        // Nothing to do
     }
 }
