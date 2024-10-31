@@ -11,6 +11,8 @@ const emit = defineEmits<{
   input: [xml: string, fragment: boolean],
 }>()
 
+const textarea = ref<HTMLTextAreaElement>();
+
 watch(xml, (newValue: string) => {
     emit('input', newValue, fragment.value);
 });
@@ -39,6 +41,25 @@ async function filePicked()
         xml.value = await readFile(filePicker.value.files[0]);
     } catch (e: any) {
         window.alert(e?.message || e?.toString() || '?');
+    }
+}
+async function paste()
+{
+    try {
+        xml.value = await navigator.clipboard.readText();
+    } catch {
+        try {       
+            if (textarea.value) {
+                textarea.value.focus();
+                textarea.value.select();
+                if (document.execCommand('paste')) {
+                    return;
+                }
+            }
+            throw new Error('Unsupported');
+        } catch (e: any) {
+            window.alert(e?.message || e?.toString() || '?');
+        }
     }
 }
 
@@ -75,12 +96,16 @@ onBeforeUnmount(() => {
 <template>
     <div class="area" v-on:dragenter="drop($event, true)" v-on:dragover="drop($event, true)" v-on:drop.prevent="drop($event, false)">
         <header><h2>Pixel 2 CIF</h2></header>
-        <textarea v-model="xml" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
+        <textarea v-model="xml" ref="textarea" placeholder="Paste here your XML or drop an XML file here.&#10;&#10;<concrete5-cif>&#10;    ...&#10;<concrete5-cif"></textarea>
         <div class="actions">
             <label>
                 <input type="checkbox" v-model="fragment" />
                 Fragment
             </label>
+            <button v-on:click.prevent="paste()">
+                <fa v-bind:icon="['fas', 'paste']" />
+                Paste
+            </button>
             <button v-on:click.prevent="pickFile()">
                 <fa v-bind:icon="['fas', 'folder-open']" />
                 Open file
@@ -106,10 +131,15 @@ textarea {
 }
 .actions {
   text-align: center;
-  padding: 10px 0 20px 0;
+  display: relative;
+  padding: 10px 20px 20px 20px;
+}
+.actions button {
+    margin: 0 10px 0 10px;
 }
 .actions label {
-    float: left;
+    position: absolute;
+    left: 20px;
     margin-top: -10px;
 }
 input[type="file"] {
