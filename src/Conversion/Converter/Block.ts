@@ -1,3 +1,5 @@
+import { convertFontAwesomeSuffix } from "../FontAwesome";
+
 export type ElementCallback = (element: Element) => void;
 
 interface TemplateConversionOption
@@ -100,6 +102,21 @@ export default abstract class Block
                 if (callback) {
                     callback(field);
                 }
+            }
+        });
+    }
+
+    protected convertFontAwesomeDataField(doc: XMLDocument, tableName: string, fieldName: string, warnings: string[]): void
+    {
+        const fieldElements = findElements(doc, `//block/data[@table="${tableName}"]/record/${fieldName}`);
+        fieldElements.forEach((fieldElement) => {
+            const oldIcon = fieldElement.textContent?.trim();
+            if (oldIcon) {
+                const newIcon = convertFontAwesomeSuffix(oldIcon);
+                if (newIcon === '') {
+                    warnings.push(`Unable to find the new FontAwesome icon corresponding to "${oldIcon}"`)
+                }
+                fieldElement.textContent = newIcon;
             }
         });
     }
