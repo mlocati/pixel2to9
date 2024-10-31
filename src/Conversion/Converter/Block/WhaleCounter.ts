@@ -3,9 +3,12 @@ import Block from '../Block';
 
 export default class WhaleCounter extends Block implements Converter
 {
-    // @ts-ignore: 'warnings' is declared but its value is never read
     public convert(doc: XMLDocument, warnings: string[]): void
     {
+        this.processconvertBlockTemplates(doc, 'whale_counter', {
+            pixel_large: {deprecated: true},
+            pixel_small: {deprecated: true},
+        }, warnings);
         this.renameBlockTypeHandle(doc, 'whale_counter', 'pixel_counter');
         this.renameDataTable(doc, 'btWhaleCounter', 'btPixelCounter');
     }
