@@ -63,7 +63,7 @@ export default abstract class Block
                 if (newCustomClasses.length > 0) {
                     let styleElement = findElements(doc, './style', blockElement).shift();
                     if (!styleElement) {
-                        styleElement = doc.createElement('stype');
+                        styleElement = doc.createElement('style');
                         blockElement.insertBefore(styleElement, blockElement.firstChild);
                     }
                     let customClassElement = findElements(doc, './customClass', styleElement).shift();
