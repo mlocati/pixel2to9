@@ -45,6 +45,7 @@ export default class WhaleCTA extends Block implements Converter
         this.addDataField(doc, 'btWhaleCta', 'color', (field) => {
             field.nodeValue = ''; // Set color value
         });
+        this.convertFontAwesomeDataField(doc, 'btWhaleCta', 'icon', warnings);
         this.renameBlockTypeHandle(doc, 'whale_cta', 'pixel_cta');
         this.renameDataTable(doc, 'btWhaleCta', 'btPixelCta');
     }
