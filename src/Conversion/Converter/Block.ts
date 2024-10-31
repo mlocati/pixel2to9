@@ -71,10 +71,10 @@ export default abstract class Block
                         customClassElement = doc.createElement('customClass');
                         styleElement.appendChild(customClassElement);
                     }
-                    const oldCustomClasses = (customClassElement.nodeValue || '').split(/\s+/).filter((c) => c.length > 0);
+                    const oldCustomClasses = (customClassElement.textContent || '').split(/\s+/).filter((c) => c.length > 0);
                     const customClassesToBeAdded = newCustomClasses.filter((c) => !oldCustomClasses.includes(c));
                     if (customClassesToBeAdded.length > 0) {
-                        customClassElement.nodeValue = [... oldCustomClasses, ...customClassesToBeAdded].join(' ');
+                        customClassElement.textContent = [... oldCustomClasses, ...customClassesToBeAdded].join(' ');
                     }
                 }
             }
