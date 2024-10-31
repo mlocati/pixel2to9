@@ -128,6 +128,8 @@ textarea {
     overflow: auto;
     resize: none;
     font-family: SFMono-Regula, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    white-space: pre;
+    overflow-wrap: normal;
 }
 .actions {
   text-align: center;

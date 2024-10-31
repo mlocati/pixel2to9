@@ -129,6 +129,8 @@ function download()
     overflow: auto;
     height: 100%;
     border: solid 1px #ddd;
+    white-space: pre;
+    overflow-wrap: normal;
 }
 .xml-and-warnings>.warnings ol {
     margin-top: 0;
