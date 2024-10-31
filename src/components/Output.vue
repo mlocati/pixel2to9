@@ -68,8 +68,14 @@ function download()
                 </div>
             </div>
             <div class="actions">
-                <button v-on:click.prevent="copy()">Copy</button>
-                <button v-on:click.prevent="download()">Download</button>
+                <button v-on:click.prevent="copy()">
+                    <fa v-bind:icon="['fas', 'copy']" />
+                    Copy
+                </button>
+                <button v-on:click.prevent="download()">
+                    <fa v-bind:icon="['fas', 'floppy-disk']" />
+                    Download
+                </button>
             </div>
         </template>
     </div>

@@ -81,7 +81,10 @@ onBeforeUnmount(() => {
                 <input type="checkbox" v-model="fragment" />
                 Fragment
             </label>
-            <button v-on:click.prevent="pickFile()">Open file</button>
+            <button v-on:click.prevent="pickFile()">
+                <fa v-bind:icon="['fas', 'folder-open']" />
+                Open file
+            </button>
             <input type="file" accept="application/xml" ref="filePicker" />
         </div>
     </div>
