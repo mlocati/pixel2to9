@@ -3,7 +3,7 @@ const parser = new DOMParser();
 export default function loadCIF(xml: string, isFragment: boolean): XMLDocument
 {
   if (isFragment) {
-    xml = `<root>${xml}</root>`;
+    xml = `<root>${xml.trim()}</root>`;
   }
   const doc = parser.parseFromString(xml, "application/xml");
   const errorElement = doc.querySelector('parsererror');
