@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
     xml: String,
@@ -7,6 +7,22 @@ const props = defineProps({
     warnings: Array<String>,
 });
 const outputText = ref<HTMLTextAreaElement>();
+
+interface GroupedWarning
+{
+    count: number,
+    text: String,
+}
+
+const groupedWarnings = computed<ReadonlyArray<GroupedWarning>>(() => {
+    const map: Map<String, number> = new Map();
+    props.warnings?.forEach((warning) => {
+        map.set(warning, (map.get(warning) || 0) + 1);
+    });
+    const result: GroupedWarning[] = [];
+    map.forEach((count, text) => result.push({count, text}));
+    return result;
+});
 
 async function copy()
 {
@@ -60,10 +76,15 @@ function download()
         <template v-else-if="xml">
             <div class="xml-and-warnings">
                 <textarea class="xml" ref="outputText" readonly v-bind:value="xml"></textarea>
-                <div v-if="warnings?.length" class="warnings">
+                <div v-if="groupedWarnings.length > 0" class="warnings">
                     Warnings!
                     <ol>
-                        <li v-for="warning in warnings">{{ warning }}</li>
+                        <li v-for="groupedWarning in groupedWarnings">
+                            {{ groupedWarning.text }}
+                            <span v-if="groupedWarning.count > 1" class="count">
+                                &times;{{  groupedWarning.count }}
+                            </span>
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -112,6 +133,17 @@ function download()
 .xml-and-warnings>.warnings ol {
     margin-top: 0;
     margin-bottom: 0;
+}
+.xml-and-warnings>.warnings li>.count {
+    background-color: rgb(108, 117, 125);
+    border-radius: 6px;
+    color: #fff;
+    display: inline-block;
+    font-size: 0.75em;
+    line-height: 1;
+    padding: 0.35em 0.45em;
+    text-align: center;
+    vertical-align: baseline;
 }
 .actions {
     text-align: center;
