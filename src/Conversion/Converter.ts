@@ -27,7 +27,7 @@ import TopicList from './Converter/Block/TopicList';
 import Video from './Converter/Block/Video';
 import WhaleChart from './Converter/Block/WhaleChart';
 import WhaleCounter from './Converter/Block/WhaleCounter';
-import WhaleCta from './Converter/Block/WhaleCta';
+import WhaleCTA from './Converter/Block/WhaleCTA';
 import WhaleGallery from './Converter/Block/WhaleGallery';
 import WhaleImageSlider from './Converter/Block/WhaleImageSlider';
 import WhaleManualNav from './Converter/Block/WhaleManualNav';
@@ -68,7 +68,7 @@ const Converters: ReadonlyArray<Converter> = [
   new Video(),
   new WhaleChart(),
   new WhaleCounter(),
-  new WhaleCta(),
+  new WhaleCTA(),
   new WhaleGallery(),
   new WhaleImageSlider(),
   new WhaleManualNav(),
