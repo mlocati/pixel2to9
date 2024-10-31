@@ -10,6 +10,7 @@ export default class WhalePricingTable extends Block implements Converter
             pixel_light: {newTemplate: '', newCustomClasses: 'pricing:minimal'},
         }, warnings);
         this.removeDataField(doc, 'btWhalePricingTable', 'featured');
+        this.convertFontAwesomeDataField(doc, 'btWhalePricingTable', 'icon', warnings);
         this.renameBlockTypeHandle(doc, 'whale_pricing_table', 'pixel_pricing_table');
         this.renameDataTable(doc, 'btWhalePricingTable', 'btPixelPricingTable');
     }
