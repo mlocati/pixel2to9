@@ -3,9 +3,14 @@ import Block from '../Block';
 
 export default class WhaleManualNav extends Block implements Converter
 {
-    // @ts-ignore: 'warnings' is declared but its value is never read
     public convert(doc: XMLDocument, warnings: string[]): void
     {
+        this.processconvertBlockTemplates(doc, '', {
+            mega_menu: {newTemplate: 'pixel_mega_menu'},
+            pixel_main_menu: {deprecated: true},
+            pixel_submenu: {deprecated: true},
+            pixel_tree: {deprecated: true},
+        }, warnings);
         this.renameBlockTypeHandle(doc, 'whale_manual_nav', 'pixel_manual_nav');
         this.renameDataTable(doc, 'btWhaleManualNavPixel', 'btPixelManualNav');
     }
