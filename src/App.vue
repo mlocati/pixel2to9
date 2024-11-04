@@ -3,9 +3,8 @@ import Input from './components/Input.vue';
 import Output from './components/Output.vue';
 
 import { ref } from 'vue'
-import loadCIF from './Xml/Loader';
 import Converters from './Conversion/Converter';
-import formatCIF from './Xml/Formatter';
+import { formatCIF, loadCIF } from './Service/Xml';
 
 const inputXml = ref<string>('');
 const inputIsFragment = ref<boolean>(false);
