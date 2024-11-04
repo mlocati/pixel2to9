@@ -5,7 +5,7 @@ export default class WhaleManualNav extends Block implements Converter
 {
     public convert(doc: XMLDocument, warnings: string[]): void
     {
-        this.processconvertBlockTemplates(doc, '', {
+        this.processconvertBlockTemplates(doc, 'whale_manual_nav', {
             mega_menu: {newTemplate: 'pixel_mega_menu'},
             pixel_main_menu: {deprecated: true},
             pixel_submenu: {deprecated: true},
