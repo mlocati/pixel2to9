@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { readFile } from '../Service/File';
+import { formatCIF, loadCIF } from '../Service/Xml';
 
 const LS_KEY_FRAGMENT = 'pixel2to9:input-fragment';
 
@@ -63,6 +64,15 @@ async function paste()
     }
 }
 
+async function format()
+{
+    try {
+        xml.value = formatCIF(loadCIF(xml.value, fragment.value), fragment.value);
+    } catch (e: any) {
+            window.alert(e?.message || e?.toString() || '?');
+    }
+}
+
 async function drop(e: DragEvent, preview: boolean)
 {
     if (!e?.dataTransfer) {
@@ -109,6 +119,10 @@ onBeforeUnmount(() => {
             <button v-on:click.prevent="pickFile()">
                 <fa v-bind:icon="['fas', 'folder-open']" />
                 Open file
+            </button>
+            <button v-on:click.prevent="format()">
+                <fa v-bind:icon="['fas', 'indent']" />
+                Format
             </button>
             <input type="file" accept="application/xml" ref="filePicker" />
         </div>
